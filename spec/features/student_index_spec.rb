@@ -1,20 +1,18 @@
 require 'rails_helper'
 
-describe 'Route to view' do
-  it 'has an index page' do
-    visit "/students"
+  
+require 'rails_helper'
 
-    expect(page.status_code).to eq(200)
+describe Student do
+  before(:each) do
+    @student = Student.create!(first_name: "Daenerys", last_name: "Targaryen")
   end
-end
 
-describe 'Multiple students are shown' do
-  it 'on the index page' do
-    Student.create!(first_name: "Daenerys", last_name: "Targaryen")
-    Student.create!(first_name: "Lindsey", last_name: "Stirling")
+  it 'can be created' do
+    expect(@student).to be_valid
+  end
 
-    visit "/students"
-
-    assert_text("Daenerys", "Lindsey")
+  it 'has a to_s instance method' do
+    expect(@student.to_s).to eq("Daenerys Targaryen")
   end
 end
